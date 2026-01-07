@@ -3,65 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manifesto | Ventura 102</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <title>Ventura 102 | Mekar, Tumbuh dan Bersemi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'Fremont';
+            src: url('asset/Fremont Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'Fremont';
+            src: url('asset/Fremont Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
         :root {
             --white: #ffffff;
             --black: #000000;
             --border: 4px;
+            --font-main: 'Fremont', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background-color: var(--white);
-            background-image: url('bg ventura.png');
-            background-size: cover;
-            background-attachment: fixed;
-            font-family: 'Inter', sans-serif;
+       body {
+            background-color: #ffffff;
+            font-family: var(--font-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        body::before {
+        /* Dekorasi Icon di Background */
+        body::after {
             content: "";
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
+            opacity: 0.07; /* Mengatur ketajaman icon background */
+            pointer-events: none;
+            /* Menggunakan Pattern Ikon Mawar, Bola, dan Sepatu */
+            background-image: 
+                url("asset\Elemen 2 1.png"),
+                 url("asset\Elemen 2 1.png"),
+                  url("asset\Elemen 2 1.png");
+            background-position: 10% 10%, 80% 40%, 30% 80%;
+            background-repeat: no-repeat;
+            background-size: 150px, 120px, 200px;
         }
-
-        /* HEADER HIERARCHY */
         header {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 60px 20px 10px;
         }
 
-        .brand-title {
-            font-family: 'Anton', sans-serif;
-            font-size: clamp(4rem, 12vw, 7rem);
-            text-transform: uppercase;
-            line-height: 0.9;
-            color: var(--black);
-            margin-bottom: 10px;
+        .brand-logo {
+            max-width: 200px;
+            width: 100%;
+            margin-bottom: 8px;
         }
 
-        .section-subtitle {
-            font-family: 'Anton', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        .main-tagline {
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: clamp(1rem, 2vw, 1.5rem);
             text-transform: uppercase;
-            letter-spacing: 4px;
             color: var(--white);
             background-color: var(--black);
             display: inline-block;
-            padding: 5px 20px;
+            padding: 8px 25px;
             box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            letter-spacing: 2px;
         }
 
-        /* GRID & CARDS */
+        .sub-tagline {
+            display: block;
+            font-weight: normal;
+            font-size: 1.4rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            color: var(--black);
+        }
+
         .main-content {
             flex: 1;
             padding: 20px;
@@ -103,6 +129,11 @@
             z-index: 2;
         }
 
+        .card-front i {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+
         .card-back {
             background: var(--black);
             color: var(--white);
@@ -110,21 +141,21 @@
             overflow-y: auto; 
             display: block; 
             text-align: left;
+            padding: 40px 30px;
         }
 
         .card-back::-webkit-scrollbar { width: 8px; }
         .card-back::-webkit-scrollbar-thumb { background: var(--white); border: 2px solid var(--black); }
 
         .card-back h3 {
-            font-family: 'Anton', sans-serif;
+            font-weight: bold;
             font-size: 2rem;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        .card-back p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
+        .card-back p { font-weight: normal; font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
 
-        /* FOOTER */
         footer {
             background-color: var(--black);
             color: var(--white);
@@ -134,21 +165,8 @@
             margin-top: 60px;
         }
 
-        .footer-content h4 {
-            font-family: 'Anton', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+        .footer-logo { width: 70px; margin-bottom: 15px; }
 
-        .footer-content p {
-            font-weight: 900;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-
-        /* OVERLAY & BUTTONS */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -164,7 +182,8 @@
             color: var(--black);
             border: var(--border) solid var(--black);
             padding: 10px 25px;
-            font-weight: 900;
+            font-family: var(--font-main);
+            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             z-index: 100;
@@ -173,8 +192,7 @@
         }
 
         .no-scroll { overflow: hidden; }
-        .icon { font-size: 4rem; }
-        .label { font-family: 'Anton', sans-serif; font-size: 1.8rem; }
+        .label { font-weight: bold; font-size: 1.8rem; text-transform: uppercase; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -183,8 +201,9 @@
     <button class="btn-close" id="btnClose" onclick="closeActiveCard()">KEMBALI</button>
 
     <header>
-        <h1 class="brand-title">VENTURA 102</h1>
-        <h2 class="section-subtitle">THE MANIFESTO</h2>
+        <img src="asset/For White Background.png" alt="Ventura Logo" class="brand-logo"> <br>
+        <h1 class="main-tagline">MEKAR, TUMBUH DAN BERSEMI</h1>
+        <span class="sub-tagline">LEAD THE WAY</span>
     </header>
 
     <main class="main-content">
@@ -192,13 +211,11 @@
             <div class="card-wrapper">
                 <div class="card" onclick="zoomIn(this)">
                     <div class="card-face card-front">
-                        <div class="icon">⚽</div>
-                        <div class="label">IDENTITY</div>
+                        <i class="ti ti-id"></i> <div class="label">IDENTITY</div>
                     </div>
                     <div class="card-face card-back">
                         <h3>KULTUR TRIBUN</h3>
                         <p>Ventura 102 lahir dari gairah yang tidak terakomodasi di toko-toko retail biasa. Kami adalah suara dari mereka yang setia mengawal kebanggaan.</p>
-                        <p>Inilah identitas kita. Bukan sekadar tren, tapi sebuah cara hidup yang kami bawa dengan bangga.</p>
                     </div>
                 </div>
             </div>
@@ -206,13 +223,11 @@
             <div class="card-wrapper">
                 <div class="card" onclick="zoomIn(this)">
                     <div class="card-face card-front">
-                        <div class="icon">🍂</div>
-                        <div class="label">RITUAL</div>
+                        <i class="ti ti-flame"></i> <div class="label">RITUAL</div>
                     </div>
                     <div class="card-face card-back">
                         <h3>DOA & ASAP</h3>
                         <p>Selembar daun tembakau adalah simbol jeda. Di antara hiruk pikuk skor pertandingan, ada momen kebersamaan yang tenang.</p>
-                        <p>Kami merayakan ritual kecil ini sebagai pondasi komunitas yang mengakar.</p>
                     </div>
                 </div>
             </div>
@@ -220,13 +235,11 @@
             <div class="card-wrapper">
                 <div class="card" onclick="zoomIn(this)">
                     <div class="card-face card-front">
-                        <div class="icon">⚙️</div>
-                        <div class="label">DESIGN</div>
+                        <i class="ti ti-flower-cottage"></i> <div class="label">DESIGN</div>
                     </div>
                     <div class="card-face card-back">
-                        <h3>NEOBRUTALISM</h3>
-                        <p>Estetika kami jujur. Kami memamerkan struktur, kami tidak menyembunyikan border tebal, dan kami mencintai kontras tajam.</p>
-                        <p>Ini adalah tentang kejujuran material dan keberanian untuk tampil mentah (raw).</p>
+                        <h3>INDEPENDENT</h3>
+                        <p>Estetika kami jujur. Kami memamerkan struktur, tidak menyembunyikan border tebal, dan mencintai kontras tajam. Seperti mawar yang tetap bersemi di lingkungan yang keras.</p>
                     </div>
                 </div>
             </div>
@@ -234,13 +247,13 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <h4>VENTURA 102</h4>
-            <p>© 2026 FOOTBALL CULTURE SUPPLY CO. • TRUTH ON THE TERRACE</p>
-        </div>
+        <img src="asset/Ventura Primary Tag.png" alt="102" class="footer-logo"> 
+        <p style="font-size: 0.8rem; letter-spacing: 2px; opacity: 0.6; text-transform: uppercase;">
+            © 2026 VENTURA 102. • INDEPENDENT SUBCULTURE
+        </p>
     </footer>
 
-    <script>
+   <script>
         let currentCard = null;
 
         function zoomIn(card) {
@@ -261,7 +274,6 @@
 
             card.style.zIndex = "60";
             document.body.classList.add('no-scroll');
-            
             overlay.style.visibility = 'visible';
             btnClose.style.display = 'block';
             
@@ -270,7 +282,7 @@
             gsap.to(card, {
                 x: xMove,
                 y: yMove,
-                scale: window.innerWidth < 600 ? 1.1 : 1.7,
+                scale: window.innerWidth < 600 ? 1.1 : 1.7, 
                 rotationY: 180,
                 duration: 0.8,
                 ease: "expo.out"
