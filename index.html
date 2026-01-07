@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifesto | Ventura 102</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --white: #ffffff;
+            --black: #000000;
+            --border: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--white);
+            background-image: url('bg ventura.png');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+
+        /* HEADER HIERARCHY */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .brand-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(4rem, 12vw, 7rem);
+            text-transform: uppercase;
+            line-height: 0.9;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--white);
+            background-color: var(--black);
+            display: inline-block;
+            padding: 5px 20px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+
+        /* GRID & CARDS */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card-wrapper { height: 350px; position: relative; }
+
+        .card {
+            width: 100%; height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            border: var(--border) solid var(--black);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 10px 0px var(--black);
+        }
+
+        .card-front {
+            background: var(--white);
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .card-back {
+            background: var(--black);
+            color: var(--white);
+            transform: rotateY(180deg);
+            overflow-y: auto; 
+            display: block; 
+            text-align: left;
+        }
+
+        .card-back::-webkit-scrollbar { width: 8px; }
+        .card-back::-webkit-scrollbar-thumb { background: var(--white); border: 2px solid var(--black); }
+
+        .card-back h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-back p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 10px solid var(--black);
+            margin-top: 60px;
+        }
+
+        .footer-content h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* OVERLAY & BUTTONS */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0; visibility: hidden;
+            z-index: 40; transition: opacity 0.4s;
+        }
+
+        .btn-close {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: var(--white);
+            color: var(--black);
+            border: var(--border) solid var(--black);
+            padding: 10px 25px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            z-index: 100;
+            display: none;
+            box-shadow: 5px 5px 0px var(--black);
+        }
+
+        .no-scroll { overflow: hidden; }
+        .icon { font-size: 4rem; }
+        .label { font-family: 'Anton', sans-serif; font-size: 1.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="closeActiveCard()"></div>
+    <button class="btn-close" id="btnClose" onclick="closeActiveCard()">KEMBALI</button>
+
+    <header>
+        <h1 class="brand-title">VENTURA 102</h1>
+        <h2 class="section-subtitle">THE MANIFESTO</h2>
+    </header>
+
+    <main class="main-content">
+        <div class="grid-container">
+            <div class="card-wrapper">
+                <div class="card" onclick="zoomIn(this)">
+                    <div class="card-face card-front">
+                        <div class="icon">⚽</div>
+                        <div class="label">IDENTITY</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <h3>KULTUR TRIBUN</h3>
+                        <p>Ventura 102 lahir dari gairah yang tidak terakomodasi di toko-toko retail biasa. Kami adalah suara dari mereka yang setia mengawal kebanggaan.</p>
+                        <p>Inilah identitas kita. Bukan sekadar tren, tapi sebuah cara hidup yang kami bawa dengan bangga.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card" onclick="zoomIn(this)">
+                    <div class="card-face card-front">
+                        <div class="icon">🍂</div>
+                        <div class="label">RITUAL</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <h3>DOA & ASAP</h3>
+                        <p>Selembar daun tembakau adalah simbol jeda. Di antara hiruk pikuk skor pertandingan, ada momen kebersamaan yang tenang.</p>
+                        <p>Kami merayakan ritual kecil ini sebagai pondasi komunitas yang mengakar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-wrapper">
+                <div class="card" onclick="zoomIn(this)">
+                    <div class="card-face card-front">
+                        <div class="icon">⚙️</div>
+                        <div class="label">DESIGN</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <h3>NEOBRUTALISM</h3>
+                        <p>Estetika kami jujur. Kami memamerkan struktur, kami tidak menyembunyikan border tebal, dan kami mencintai kontras tajam.</p>
+                        <p>Ini adalah tentang kejujuran material dan keberanian untuk tampil mentah (raw).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h4>VENTURA 102</h4>
+            <p>© 2026 FOOTBALL CULTURE SUPPLY CO. • TRUTH ON THE TERRACE</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentCard = null;
+
+        function zoomIn(card) {
+            if (currentCard) return;
+            currentCard = card;
+
+            const overlay = document.getElementById('overlay');
+            const btnClose = document.getElementById('btnClose');
+            const rect = card.getBoundingClientRect();
+            
+            const xMove = (window.innerWidth / 2) - (rect.left + rect.width / 2);
+            const yMove = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+
+            gsap.to(".card", {
+                opacity: (i, target) => target === card ? 1 : 0,
+                duration: 0.3
+            });
+
+            card.style.zIndex = "60";
+            document.body.classList.add('no-scroll');
+            
+            overlay.style.visibility = 'visible';
+            btnClose.style.display = 'block';
+            
+            gsap.to(overlay, { opacity: 1, duration: 0.4 });
+
+            gsap.to(card, {
+                x: xMove,
+                y: yMove,
+                scale: window.innerWidth < 600 ? 1.1 : 1.7,
+                rotationY: 180,
+                duration: 0.8,
+                ease: "expo.out"
+            });
+        }
+
+        function closeActiveCard() {
+            if (!currentCard) return;
+
+            const overlay = document.getElementById('overlay');
+            const btnClose = document.getElementById('btnClose');
+
+            gsap.to(currentCard, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotationY: 0,
+                duration: 0.6,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    currentCard.style.zIndex = "5";
+                    currentCard = null;
+                    document.body.classList.remove('no-scroll');
+                    overlay.style.visibility = 'hidden';
+                    btnClose.style.display = 'none';
+                }
+            });
+
+            gsap.to(".card", { opacity: 1, duration: 0.4 });
+            gsap.to(overlay, { opacity: 0, duration: 0.4 });
+        }
+    </script>
+</body>
+</html>
